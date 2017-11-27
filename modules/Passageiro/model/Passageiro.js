@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var PassageiroSchema = new mongoose.Schema({
  nome: String,
  dtNasc: String,
- cpf: {type: Number, default: 0},
+ cpf: String,
  sexo: String
 });
 

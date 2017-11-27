@@ -49,27 +49,27 @@
 
         <div id="corrida-form">
         <hr>
-            <form>
+            <form name="formCorr">
                 <div class="form-group col-md-3">
                         <label for="motorista">Motorista</label>
-                        <select class="form-control" id="motorista" ng-model="formCorrida.motorista">
+                        <select class="form-control" id="motorista" ng-model="formCorrida.motorista" required>
                                 <option ng-repeat="motorista in motoristas" ng-value="motorista.nome">{{motorista.nome}}</option>
                                 
                         </select>
                 </div>
                 <div class="form-group col-md-3">
                         <label for="passageiro">Passageiro</label>
-                        <select class="form-control" id="passageiro" ng-model="formCorrida.passageiro">
+                        <select class="form-control" id="passageiro" ng-model="formCorrida.passageiro" required>
                                 <option ng-repeat="passageiro in passageiros" ng-value="passageiro.nome">{{passageiro.nome}}</option>
                         </select>
                 </div>
                 <div class="form-group col-md-3">
                         <label for="valor">Valor da Corrida</label>
-                        <input type="text" class="form-control" id="valor" ng-model="formCorrida.valorCorrida">
+                        <input type="text" class="form-control" id="valor" ng-model="formCorrida.valorCorrida" required>
                 </div>
                 <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-primary" ng-click="criarCorrida()">Criar</button>
-                    <button type="submit" class="btn btn-info" ng-click="atualizarCorrida()">Atualizar</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="formCorr.$invalid" ng-click="criarCorrida()">Criar</button>
+                    <button type="submit" class="btn btn-info" ng-disabled="formCorr.$invalid" ng-click="atualizarCorrida()">Atualizar</button>
                 </div>
             </form>
         </div>
