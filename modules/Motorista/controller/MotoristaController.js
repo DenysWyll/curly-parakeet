@@ -26,6 +26,7 @@ listaMotorista.controller( 'mainController', function ($scope, $http) {
                // Limpa o formulário para criação de outros motorista
                $scope.formMotorista = {};
                $scope.motorista = data;
+               refresh();
                console.log(data);
            })
            .error(function(data) {
@@ -38,6 +39,7 @@ listaMotorista.controller( 'mainController', function ($scope, $http) {
        $http.delete('/api/motoristas/' + id)
            .success(function(data) {
                $scope.motorista = data;
+               refresh();
                console.log(data);
            })
            .error(function(data) {
@@ -61,6 +63,7 @@ listaMotorista.controller( 'mainController', function ($scope, $http) {
    $scope.atualizarMotorista = function() {        
        $http.put('/api/motoristas/' + $scope.formMotorista._id, $scope.formMotorista)
        .success( function(response){
+
            refresh();
        });
    };

@@ -1,0 +1,109 @@
+<!doctype html>
+<html ng-app="listaPassageiro">
+<head>
+   <!-- META -->
+   <meta charset="utf-8">
+   <!-- Otimizar a exibição em dispositivos móveis -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>Lista de Passageiros</title>
+
+   <!-- CSS -->
+   <!-- Carregando o bootstrap-->
+   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+   <style>
+       html                    { overflow-y:scroll; }
+       body                    { padding-top:50px; }
+       #lista-passageiros         { margin-bottom:30px; }
+       form button             { margin-top: 25px; }
+       form .form-group:first-child { padding-left: 0; }
+   </style>
+
+   <!-- JS -->
+   <!-- Carregando a biblioteca jQuery -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+   <!-- Carregando a biblioteca AngularJS -->
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+   <script src="../controller/PassageiroController.js"></script>
+
+</head>
+
+<body ng-controller="mainController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sistema de Corridas</a>
+            </div>
+            <ul class="nav navbar-nav">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../Motorista/view/listaMotorista.html">Gegenciar Motoristas</a></li>
+            <li class="active"><a href="listaPassageiro.html">Controle de Passageiros</a></li>
+            <li><a href="../../Corrida/view/listaCorrida.html">Corridas</a></li>
+            </ul>
+        </div>
+    </nav>
+   <div class="container">
+
+       <div class="jumbotron text-center">
+           <h1>Lista de Passageiros</h1>
+       </div>
+
+        <div id="passageiro-form">
+        <hr>
+            <form name="formPass">
+                <div class="form-group col-md-4">
+                    <label for="nomePassageiro">Nome</label>
+                    <input type="text" class="form-control" id="nomePassageiro" placeholder="Nome Sobrenome" ng-model="formPassageiro.nome" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="nascPassageiro">Data nascimento</label>
+                    <input type="text" class="form-control" id="nascPassageiro" ng-model="formPassageiro.dtNasc" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cpfPassageiro">CPF</label>
+                    <input type="text" class="form-control" id="cpfPassageiro" placeholder="Digite apenas os números" ng-model="formPassageiro.cpf" required>
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="sexo">Sexo</label>
+                        <select class="form-control" id="sexo" ng-model="formPassageiro.sexo" required>
+                                <option ng-value="Masculino">Masculino</option>
+                                <option ng-value="Feminino">Feminino</option>
+                        </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary" ng-click="criarPassageiro()" ng-disabled="formPass.$invalid">Criar</button>
+                    <button type="submit" class="btn btn-info" ng-click="atualizarPassageiro()"ng-disabled="formPass.$invalid">Atualizar</button>
+                </div>
+            </form>
+        </div>
+       <!-- LISTA PASSAGEIROS -->
+       <div id="lista-passageiros">
+           <table class="table table-striped">
+
+               <tr>
+                   <th>Nome</th>
+                   <th>Data de Nascimento</th>
+                   <th>CPF</th>
+                   <th>Sexo</th>
+                   <th>Opções</th>
+               </tr>
+
+               <!-- LOOP PARA CARREGAR TODOS OS PASSAGEIROS EM $scope.passageiros -->
+               <tr ng-repeat="passageiro in passageiros">
+                   <td>{{ passageiro.nome }}</td>
+                   <td>{{ passageiro.dtNasc }}</td>
+                   <td>{{ passageiro.cpf }}</td>
+                   <td>{{ passageiro.sexo }}</td>
+                   <td>
+                       <button type="button" class="btn btn-default" ng-click="editarPassageiro(passageiro._id)">Editar</button>
+                       <button type="button" class="btn btn-primary" ng-click="deletarPassageiro(passageiro._id)">Remover</button>
+                   </td>
+               </tr>
+
+           </table>
+       </div>
+
+   </div>
+
+</body>
+</html>

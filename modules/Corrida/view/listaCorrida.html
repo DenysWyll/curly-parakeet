@@ -1,0 +1,105 @@
+<!doctype html>
+<html ng-app="listaCorrida">
+<head>
+   <!-- META -->
+   <meta charset="utf-8">
+   <!-- Otimizar a exibição em dispositivos móveis -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>Lista de Corridas</title>
+
+   <!-- CSS -->
+   <!-- Carregando o bootstrap-->
+   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+   <style>
+       html                    { overflow-y:scroll; }
+       body                    { padding-top:50px; }
+       #lista-corridas         { margin-bottom:30px; }
+       form button             { margin-top: 25px; }
+       form .form-group:first-child { padding-left: 0; }
+   </style>
+
+   <!-- JS -->
+   <!-- Carregando a biblioteca jQuery -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+   <!-- Carregando a biblioteca AngularJS -->
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+   <script src="../controller/CorridaController.js"></script>
+
+</head>
+<body ng-controller="mainController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sistema de Corridas</a>
+            </div>
+            <ul class="nav navbar-nav">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../Motorista/view/listaMotorista.html">Gegenciar Motoristas</a></li>
+            <li><a href="../../Passageiro/view/listaPassageiro.html">Controle de Passageiros</a></li>
+            <li class="active"><a href="listaCorrida.html">Corridas</a></li>
+            </ul>
+        </div>
+    </nav>
+   <div class="container">
+
+       <div class="jumbotron text-center">
+           <h1>Lista de Corridas</h1>
+       </div>
+
+        <div id="corrida-form">
+        <hr>
+            <form>
+                <div class="form-group col-md-3">
+                        <label for="motorista">Motorista</label>
+                        <select class="form-control" id="motorista" ng-model="formCorrida.motorista">
+                                <option ng-repeat="motorista in motoristas" ng-value="motorista.nome">{{motorista.nome}}</option>
+                                
+                        </select>
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="passageiro">Passageiro</label>
+                        <select class="form-control" id="passageiro" ng-model="formCorrida.passageiro">
+                                <option ng-repeat="passageiro in passageiros" ng-value="passageiro.nome">{{passageiro.nome}}</option>
+                        </select>
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="valor">Valor da Corrida</label>
+                        <input type="text" class="form-control" id="valor" ng-model="formCorrida.valorCorrida">
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary" ng-click="criarCorrida()">Criar</button>
+                    <button type="submit" class="btn btn-info" ng-click="atualizarCorrida()">Atualizar</button>
+                </div>
+            </form>
+        </div>
+       <!-- LISTA CORRIDAS -->
+       <div id="lista-corridas">
+           <table class="table table-striped">
+
+               <tr>
+                   <th>Motorista</th>
+                   <th>Passageiro</th>
+                   <th>Valor da corrida</th>
+                   <th>Opções</th>
+               </tr>
+
+               <!-- LOOP PARA CARREGAR TODOS OS CORRIDAS EM $scope.corridas -->
+               <tr ng-repeat="corrida in corridas">
+                   <td>{{ corrida.motorista }}</td>
+                   <td>{{ corrida.passageiro }}</td>
+                   <td>{{ corrida.valorCorrida }}</td>
+                   
+                   <td>
+                       <button type="button" class="btn btn-default" ng-click="editarCorrida(corrida._id)">Editar</button>
+                       <button type="button" class="btn btn-primary" ng-click="deletarCorrida(corrida._id)">Remover</button>
+                   </td>
+               </tr>
+
+           </table>
+       </div>
+
+   </div>
+
+</body>
+</html>

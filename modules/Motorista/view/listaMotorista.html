@@ -27,54 +27,86 @@
    <script src="../controller/MotoristaController.js"></script>
 
 </head>
-<!-- DEFINE O CONTROLLER E BUSCA TODOS OS CONTATOS -->
 <body ng-controller="mainController">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="#">Sistema de Corridas</a>
+                </div>
+                <ul class="nav navbar-nav">
+                <li><a href="../../">Home</a></li>
+                <li class="active"><a href="listaMotorista.html">Gegenciar Motoristas</a></li>
+                <li><a href="../../Passageiro/view/listaPassageiro.html">Controle de Passageiros</a></li>
+                <li><a href="../../Corrida/view/listaCorrida.html">Corridas</a></li>
+                </ul>
+            </div>
+    </nav>
    <div class="container">
 
-       <!-- CABEÇALHO E TOTAL DE CONTATOS -->
        <div class="jumbotron text-center">
-           <h1>Lista de Motoristas <span class="label label-info">{{ motoristas.length }}</span></h1>
+           <h1>Lista de Motoristas</h1>
        </div>
 
-       <!-- FORMULÁRIO PARA CRIARMOS UM NOVO CONTATO -->
         <div id="motorista-form">
         <hr>
-            <form>
-                <div class="form-group col-md-3">
+            <form name="formMoto">
+                <div class="form-group col-md-4">
                     <label for="nomeMotorista">Nome</label>
-                    <input type="text" class="form-control" id="nomeMotorista" placeholder="Nome Sobrenome" ng-model="formMotorista.nome">
+                    <input type="text" class="form-control" id="nomeMotorista" placeholder="Nome Sobrenome" ng-model="formMotorista.nome" required>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="nascMotorista">Data nascimento</label>
-                    <input type="text" class="form-control" id="nascMotorista" ng-model="formMotorista.dtNasc">
+                    <input type="text" class="form-control" id="nascMotorista" ng-model="formMotorista.dtNasc" required>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="cpfMotorista">CPF</label>
-                    <input type="text" class="form-control" id="cpfMotorista" placeholder="Digite apenas os números" ng-model="formMotorista.cpf">
+                    <input type="text" class="form-control" id="cpfMotorista" placeholder="Digite apenas os números" ng-model="formMotorista.cpf" required>
                 </div>
                 <div class="form-group col-md-3">
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-                    <button type="submit" class="btn btn-primary" ng-click="criarMotorista()">Criar</button>
-                    <button type="submit" class="btn btn-info" ng-click="atualizarMotorista()">Atualizar</button>
+                        <label for="carro">Modelo do Carro</label>
+                        <input type="text" class="form-control" id="carro" placeholder="Modelo do carro" ng-model="formMotorista.modeloCarro" required>
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" ng-model="formMotorista.status" required>
+                                <option ng-value="true">Ativo</option>
+                                <option ng-value="false">Inativo</option>
+                        </select>
+                        <!--input type="text" class="form-control" id="status" ng-model="formMotorista.status"-->
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="sexo">Sexo</label>
+                        <select class="form-control" id="sexo" ng-model="formMotorista.sexo" required>
+                                <option ng-value="Masculino">Masculino</option>
+                                <option ng-value="Feminino">Feminino</option>
+                        </select>
+                        <!--<input type="text" class="form-control" id="sexo" ng-model="formMotorista.sexo"-->
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary" ng-disabled="formMoto.$invalid" ng-click="criarMotorista()">Criar</button>
+                    <button type="submit" class="btn btn-info" ng-disabled="formMoto.$invalid" ng-click="atualizarMotorista()">Atualizar</button>
                 </div>
             </form>
         </div>
-       <!-- LISTA NOSSOS CONTATOS -->
+       <!-- LISTA MOTORISTAS -->
        <div id="lista-motoristas">
            <table class="table table-striped">
 
                <tr>
                    <th>Nome</th>
-                   <th>Nascimento</th>
+                   <th>Carro</th>
                    <th>CPF</th>
+                   <th>Status</th>
                    <th>Opções</th>
                </tr>
 
-               <!-- LOOP PARA CARREGAR TODOS OS CONTATOS EM $scope.motoristas -->
+               <!-- LOOP PARA CARREGAR TODOS OS MOTORISTAS EM $scope.motoristas -->
                <tr ng-repeat="motorista in motoristas">
                    <td>{{ motorista.nome }}</td>
-                   <td>{{ motorista.dtNasc }}</td>
+                   <td>{{ motorista.modeloCarro }}</td>
                    <td>{{ motorista.cpf }}</td>
+                   <td>{{ motorista.status }}</td>
                    <td>
                        <button type="button" class="btn btn-default" ng-click="editarMotorista(motorista._id)">Editar</button>
                        <button type="button" class="btn btn-primary" ng-click="deletarMotorista(motorista._id)">Remover</button>
