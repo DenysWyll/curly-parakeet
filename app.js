@@ -7,12 +7,13 @@ var methodOverride = require('method-override');
  
  
 // conectando ao mongodb no localhost, criando o banco de dados contato
-mongoose.connect('mongodb://localhost/denys_teste');
+//mongoose.connect('mongodb://localhost/denys_teste');
+mongoose.connect('mongodb://denys_teste:qwert*1234@cluster0-shard-00-00-eao6n.mongodb.net:27017,cluster0-shard-00-01-eao6n.mongodb.net:27017,cluster0-shard-00-02-eao6n.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 require('./modules/Motorista/model/Motorista');
 require('./modules/Passageiro/model/Passageiro');
 require('./modules/Corrida/model/Corrida');
  
- 
+
 // definindo local de arquivos públicos
 app.use(express.static(__dirname + '/modules'));
 // logando todas as requisições no console
